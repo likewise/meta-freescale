@@ -33,7 +33,7 @@ SRC_URI = "git://opensource.freescale.com/pub/scm/imx/linux-2.6-imx.git;tag=rel_
           "
 
 # TODO: Work in progress to follow Freescale. The following patches are
-# causing black screens when using VPU video playout.
+# causing black screens when using VPU video playout at 1080p.
 # -- Leon Woestenberg <leon@sidebranch.com>
 #
 #           file://1131-ENGR00158480-IPUv3-Set-IDMAC-LOCK-for-SDC-display-ch.patch \
@@ -44,3 +44,16 @@ SRC_URI = "git://opensource.freescale.com/pub/scm/imx/linux-2.6-imx.git;tag=rel_
 #EXTRA_OEMAKE += "V=1"
 
 S = "${WORKDIR}/git"
+
+# bounds.h is not installed (into sysroot) and imx-test needs it.
+# Work-around found here: http://patches.openembedded.org/patch/2787/
+do_install_prepend() {
+  mkdir headerstash -p
+  cp include/generated/bounds.h headerstash/
+#  cp include/asm-arm/asm-offsets.h headerstash/
+}
+do_install_append() {
+  cp headerstash/bounds.h $kerneldir/include/linux/
+#  cp headerstash/asm-offsets.h $kerneldir/include/asm-arm/asm-offsets.h
+  rm -rf headerstash/
+}

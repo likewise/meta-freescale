@@ -13,4 +13,24 @@ SRC_URI = "file://imx-test-11.09.01.tar.gz \
            file://0002-ENGR00170223-vpu-Fix-encoder-with-rotation-90-or-270.patch \
            file://0003-ENGR00162747-fix-asrc-sample-rate-convert-issue.patch"
 
+S = "${WORKDIR}/${PN}-11.09.01"
+
+# override parallel make flags
+#PARALLEL_MAKE="-j 1"
+#EXTRA_OEMAKE = ""
+
+do_compile () {
+#    INCLUDE_DIR="-I${STAGING_INCDIR} -I${STAGING_KERNEL_DIR}/drivers/mxc/security/rng/include \
+#                 -I${STAGING_KERNEL_DIR}/drivers/mxc/security/sahara2/include"
+    oe_runmake CROSS_COMPILE="${HOST_PREFIX}" PLATFORM="IMX53" KBUILD_OUTPUT="${STAGING_KERNEL_DIR}" LINUXPATH="${STAGING_KERNEL_DIR}" all
+}
+
+#for iMX53:
+#FILES = "platform/IMX53/*"
+
+#do_install () {
+#    oe_runmake DEST_DIR="${D}" install
+#}
+
+
 
