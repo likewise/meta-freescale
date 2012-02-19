@@ -1,0 +1,47 @@
+Index: imx-test-11.09.01/test/Makefile
+===================================================================
+--- imx-test-11.09.01.orig/test/Makefile	2012-02-19 01:44:26.764787631 +0100
++++ imx-test-11.09.01/test/Makefile	2012-02-19 01:45:04.888290031 +0100
+@@ -2,6 +2,7 @@
+ 
+ # Get all dirs with a Makefile
+ TMP_DIRS := $(foreach dir, $(wildcard *), $(wildcard $(dir)/Makefile))
++TMP_DIRS := mxc_ipudev_test mxc_vpu_test
+ DIRS := $(patsubst %/Makefile,%,$(TMP_DIRS))
+ 
+ .PHONY: all clean
+Index: imx-test-11.09.01/Makefile
+===================================================================
+--- imx-test-11.09.01.orig/Makefile	2012-02-19 02:44:25.908288284 +0100
++++ imx-test-11.09.01/Makefile	2012-02-19 02:44:48.216288621 +0100
+@@ -33,7 +33,7 @@
+ 
+ .PHONY: test module_test clean distclean pkg install
+ 
+-all : test module_test
++all : test #module_test
+ 
+ test:
+ 	@echo
+@@ -62,7 +62,7 @@
+ 
+ clean:
+ 	$(MAKE) -C $(TOPDIR)/test $@
+-	$(MAKE) -C $(TOPDIR)/module_test $@
++#	$(MAKE) -C $(TOPDIR)/module_test $@
+ 	-rm -rf platform
+ 
+ pkg : clean
+Index: imx-test-11.09.01/test/mxc_ipudev_test/Makefile
+===================================================================
+--- imx-test-11.09.01.orig/test/mxc_ipudev_test/Makefile	2012-02-19 02:48:52.948515446 +0100
++++ imx-test-11.09.01/test/mxc_ipudev_test/Makefile	2012-02-19 02:49:12.276231414 +0100
+@@ -2,7 +2,7 @@
+ INCLUDE_LIST:=IMX31_3STACK IMX35_3STACK IMX37_3STACK IMX51 IMX53
+ 
+ SRCS = mxc_ipudev_test.c utils.c test_pattern.c
+-CFLAGS += -lipu -lIpuScreenLayer -lm -lrt
++CFLAGS += -lipu -lIpuScreenLayer -lm -lrt -lpthread
+ 
+ ifeq ($(PLATFORM),$(findstring $(PLATFORM),$(INCLUDE_LIST)))
+ OBJS = $(OBJDIR)/mxc_ipudev_test.out
