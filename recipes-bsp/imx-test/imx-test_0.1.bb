@@ -26,11 +26,11 @@ do_compile () {
 }
 
 #for iMX53:
-#FILES = "platform/IMX53/*"
+FILES_${PN} = "/platform/IMX53/*"
 
-#do_install () {
-#    oe_runmake DEST_DIR="${D}" install
-#}
+do_install () {
+    oe_runmake DESTDIR="${D}" install
+}
 
 
 
