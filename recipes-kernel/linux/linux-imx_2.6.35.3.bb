@@ -29,6 +29,10 @@ SRC_URI = "git://opensource.freescale.com/pub/scm/imx/linux-2.6-imx.git;tag=rel_
            file://001_Add_accept4_syscall.patch \
            file://002_Return_ERESTARTSYS_from_IPU_GET_EVENT.patch \
            file://003_Sanitise_ipu_interrupt_return_value.patch \
+           file://1131-ENGR00158480-IPUv3-Set-IDMAC-LOCK-for-SDC-display-ch.patch \
+           file://1133-ENGR00159010-IPUv3-Restore-IDMAC_CH_LOCK_EN_1-for-re.patch \
+           file://1135-ENGR00160566-IPUv3-Improve-IDMAC_LOCK_EN-setting.patch \ 
+           file://1138-ENGR00162195-IPUv3M-Clear-IDMAC_LOCK_EN_1-for-tough.patch \
            file://defconfig \
           "
 
@@ -36,10 +40,6 @@ SRC_URI = "git://opensource.freescale.com/pub/scm/imx/linux-2.6-imx.git;tag=rel_
 # causing black screens when using VPU video playout at 1080p.
 # -- Leon Woestenberg <leon@sidebranch.com>
 #
-#           file://1131-ENGR00158480-IPUv3-Set-IDMAC-LOCK-for-SDC-display-ch.patch \
-#           file://1133-ENGR00159010-IPUv3-Restore-IDMAC_CH_LOCK_EN_1-for-re.patch \
-#           file://1138-ENGR00162195-IPUv3M-Clear-IDMAC_LOCK_EN_1-for-tough.patch \
-#           file://1135-ENGR00160566-IPUv3-Improve-IDMAC_LOCK_EN-setting.patch \ 
 #           file://devtmpfs-init-options-alignment.patch \
 #EXTRA_OEMAKE += "V=1"
 
